@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">drink-more-water</string>
+    <string name="water_notification_channel">water_channel</string>
+    <string name="image_transparente_water_description">corpo de água em movimento no centro da imagem em fundo branco</string>
+    <string name="timer_running">E não tenha pedra nos rins.</string>
+    <string name="drink_now">Chegou a hora! Vamos beber água?</string>
+    <string name="notification_title">Beba água!</string>
+    <string name="userAction">Pronto, bebi…</string>
+    <string name="notification_channel_description">Lembrete rapido</string>
+    <string name="water_notification_channel_name">beba_agua</string>
+</resources>
