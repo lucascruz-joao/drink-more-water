@@ -9,12 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.databinding.DataBindingUtil
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.drink_more_water.R
-import com.example.drink_more_water.databinding.FragmentWaterTimerBinding
-
 
 class WaterTimerFragment : Fragment() {
 
@@ -23,35 +22,42 @@ class WaterTimerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentWaterTimerBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_water_timer, container, false
-        )
-
-        val viewModel = ViewModelProvider(this)[WaterTimerViewModel::class.java]
-
-        binding.waterTimerViewModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        val view = inflater.inflate(R.layout.fragment_water_timer, container, false)
 
         createChannel(
             getString(R.string.water_notification_channel),
             getString(R.string.water_notification_channel_name)
         )
 
-        return binding.root
+        return view
+
+//        val binding: FragmentWaterTimerBinding = DataBindingUtil.inflate(
+//            inflater, R.layout.fragment_water_timer, container, false
+//        )
+
+//        val viewModel = ViewModelProvider(this)[WaterTimerViewModel::class.java]
+
+//        binding.waterTimerViewModel = viewModel
+//        binding.lifecycleOwner = this.viewLifecycleOwner
+
+//        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        view.findViewById<ImageButton>(R.id.imageButtonConfig).setOnClickListener {
+            findNavController().navigate(R.id.action_WaterTimerFragment_to_ConfigTimerFragment)
+        }
+
         val viewModel = ViewModelProvider(this)[WaterTimerViewModel::class.java]
-        viewModel.isAlarmOn
+        viewModel.isAlarmOn.value = true
         viewModel.timeSelection.value = 0
 
         val buttonSetAlarm = view.findViewById(R.id.buttonArrombado) as Button
         buttonSetAlarm.setOnClickListener {
             viewModel.setAlarm(true)
         }
-
     }
 
     private fun createChannel(channelId: String, channelName: String) {

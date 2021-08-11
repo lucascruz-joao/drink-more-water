@@ -29,23 +29,23 @@ import androidx.core.content.ContextCompat
 
 class SnoozeReceiver: BroadcastReceiver() {
     private val REQUEST_CODE = 0
+    private lateinit var alarmIntent: PendingIntent
 
     override fun onReceive(context: Context, intent: Intent) {
         val triggerTime = SystemClock.elapsedRealtime() + DateUtils.MINUTE_IN_MILLIS
 
-        val notifyIntent = Intent(context, AlarmReceiver::class.java)
-        val notifyPendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            notifyIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmIntent = Intent(context, AlarmReceiver::class.java).let {intent ->
+            PendingIntent.getBroadcast(context, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        val alarmManager =
+                context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             alarmManager,
             AlarmManager.ELAPSED_REALTIME_WAKEUP,
             triggerTime,
-            notifyPendingIntent
+            alarmIntent
         )
 
         val notificationManager = ContextCompat.getSystemService(

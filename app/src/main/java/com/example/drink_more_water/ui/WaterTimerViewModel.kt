@@ -45,9 +45,8 @@ class WaterTimerViewModel(private val app: Application) : AndroidViewModel(app) 
         get() = _elapsedTime
 
     private var _alarmOn = MutableLiveData<Boolean>()
-    val isAlarmOn: LiveData<Boolean>
+    val isAlarmOn: MutableLiveData<Boolean>
         get() = _alarmOn
-
 
     private lateinit var timer: CountDownTimer
 
