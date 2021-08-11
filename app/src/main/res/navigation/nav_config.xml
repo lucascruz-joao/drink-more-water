@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_config"
+    app:startDestination="@id/waterTimerFragment">
+
+    <fragment
+        android:id="@+id/waterTimerFragment"
+        android:name="com.example.drink_more_water.ui.WaterTimerFragment"
+        android:label="WaterTimerFragment"
+        tools:layout="@layout/fragment_water_timer">
+
+        <action
+            android:id="@+id/action_WaterTimerFragment_to_ConfigTimerFragment"
+            app:destination="@id/configTimerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/configTimerFragment"
+        android:label="ConfigTimerFragment"
+        android:name="com.example.drink_more_water.ui.ConfigTimerFragment"
+        tools:layout="@layout/fragment_timer_config">
+
+        <action
+            android:id="@+id/action_ConfigTimerFragment_to_WaterTimerFragment"
+            app:destination="@id/waterTimerFragment" />
+    </fragment>
+
+</navigation>
